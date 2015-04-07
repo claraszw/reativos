@@ -181,9 +181,36 @@ int main (int argc, char *argv[])
                 //Update the surface
                 SDL_UpdateWindowSurface( window );
 
-                SDL_WaitEvent(&e);
+                while(SDL_PollEvent(&e)!=0 || !quit)
+                {
+                    if( e.type == SDL_QUIT )
+                    {
+                        quit = 1;
+                    }
+                    else if( e.type == SDL_KEYDOWN )
+                    {
+                        if(e.key.keysym.sym == SDLK_SPACE)
+                        {
+                            cont_fallen=0;
+                            flag_apple2=0;
+                            flag_apple3=0;
+                            time = 200;
+                            basket.x=SCREEN_WIDTH/2;
+                            apple.x=SCREEN_WIDTH/2;
+                            apple2.x=SCREEN_WIDTH/2+50;
+                            apple3.x=SCREEN_WIDTH/2-100;
+                            apple.y=0;
+                            apple2.y=0;
+                            apple3.y=0;
+                            old_time1 = SDL_GetTicks();
+                            old_time2 = SDL_GetTicks() + 2000;
+                            old_time3 = SDL_GetTicks() + 4000;
+                            break;
+                        }
+                    }
 
-                quit=1;
+                }
+
             }
        }
 
